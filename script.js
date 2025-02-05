@@ -149,8 +149,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>Célula Fidelidad</h4>
           <p><strong>Coordinadores:</strong> Eric y Carla Mananita</p>
-          <p><strong>Dirección:</strong> </p>
-          <p><strong>Referencia:</strong> </p>
+          <p><strong>Dirección:</strong> Jr. 2 de mayo Mz 109 Lt 10A</p>
+          <p><strong>Referencia:</strong> -</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/8wq6PTs5a39N8HC56" target="_blank">Ver en Maps</a></p>
         </div>
       `
@@ -162,8 +162,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>Célula Benignidad</h4>
           <p><strong>Coordinadores:</strong> Oldemar y Lucy Muñoz</p>
-          <p><strong>Dirección:</strong> </p>
-          <p><strong>Referencia:</strong> </p>
+          <p><strong>Dirección:</strong> Jr. Las Gaviotas Mz 11A Lt 07</p>
+          <p><strong>Referencia:</strong> -</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/8W92SE2spfK96ZS77" target="_blank">Ver en Maps</a></p>
         </div>
       `
@@ -192,10 +192,10 @@ document.addEventListener("DOMContentLoaded", function() {
     markerObjects.push(marker);
   });
 
-  // Creamos la leyenda en el div con id "legend"
+  // Creamos la leyenda en el div con id "legend" sin el subtítulo "Células"
   var legendDiv = document.getElementById("legend");
   if (legendDiv) {
-    var legendHTML = '<h3>Leyenda</h3><h4>Células</h4><ul>';
+    var legendHTML = '<h3>Leyenda</h3><ul>';
     markers.forEach(function(markerData, index) {
       legendHTML += `<li data-index="${index}">${markerData.name}</li>`;
     });
