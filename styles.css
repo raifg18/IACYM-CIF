@@ -1,116 +1,116 @@
 /* Estilos generales */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  
-  /* Encabezado */
-  header {
-    text-align: center;
-    padding: 20px;
-    background-color: #003366;
-    color: #fff;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 2em;
-  }
-  header h2 {
-    margin: 10px 0 0;
-    font-size: 1.5em;
-    font-weight: normal;
-  }
-  header h3 {
-    margin: 5px 0 0;
-    font-size: 1em;
-    font-style: italic;
-    font-weight: lighter;
-  }
-  
-  /* Contenedor del mapa */
-  #map {
-    height: 80vh; /* Ocupa el 80% de la altura de la ventana */
-    width: 100%;
-    position: relative;
-  }
-  
-  /* Estilos para el popup */
-  .popup-content {
-    font-size: 0.9em;
-  }
-  .popup-content h4 {
-    margin: 0 0 5px 0;
-    color: #003366;
-  }
-  .popup-content p {
-    margin: 5px 0;
-  }
-  .popup-content a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-  .popup-content a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Ícono personalizado: círculo más pequeño y llamativo */
-  .custom-marker {
-    width: 20px;
-    height: 20px;
-    background: #ffcc00;
-    border: 2px solid #003366;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  }
-  
-  /* Leyenda flotante reubicada al centro del lado izquierdo y estilizada */
-  #legend {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.97);
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    max-width: 220px;
-    z-index: 1000;
-  }
-  #legend h3 {
-    margin: 0;
-    font-size: 1.4em;
-    color: #003366;
-    border-bottom: 2px solid #003366;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  #legend h4 {
-    margin: 0 0 10px;
-    font-size: 1.1em;
-    color: #003366;
-    font-weight: normal;
-  }
-  #legend ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  #legend ul li {
-    cursor: pointer;
-    padding: 8px;
-    margin-bottom: 8px;
-    font-size: 1em;
-    color: #003366;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background: #f9f9f9;
-    transition: background-color 0.3s;
-  }
-  #legend ul li:hover {
-    background-color: #e6e6e6;
-  }
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Encabezado */
+header {
+  text-align: center;
+  padding: 20px;
+  background-color: #003366;
+  color: #fff;
+}
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+header h2 {
+  margin: 10px 0 0;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+header h3 {
+  margin: 5px 0 0;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+/* Contenedor del mapa */
+#map {
+  height: 80vh; /* Ocupa el 80% de la altura de la ventana */
+  width: 100%;
+  position: relative;
+}
+
+/* Estilos para el popup */
+.popup-content {
+  font-size: 0.9em;
+}
+.popup-content h4 {
+  margin: 0 0 5px 0;
+  color: #003366;
+}
+.popup-content p {
+  margin: 5px 0;
+}
+.popup-content a {
+  color: #007BFF;
+  text-decoration: none;
+}
+.popup-content a:hover {
+  text-decoration: underline;
+}
+
+/* Ícono personalizado: círculo pequeño y llamativo */
+.custom-marker {
+  width: 20px;
+  height: 20px;
+  background: #ffcc00;
+  border: 2px solid #003366;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Leyenda flotante reubicada al centro del lado izquierdo y estilizada */
+#legend {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.97);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  max-width: 220px;
+  z-index: 1000;
+}
+#legend h3 {
+  margin: 0;
+  font-size: 1.4em;
+  color: #003366;
+  border-bottom: 2px solid #003366;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+#legend h4 {
+  margin: 0 0 10px;
+  font-size: 1.1em;
+  color: #003366;
+  font-weight: normal;
+}
+#legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#legend ul li {
+  cursor: pointer;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 1em;
+  color: #003366;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f9f9f9;
+  transition: background-color 0.3s;
+}
+#legend ul li:hover {
+  background-color: #e6e6e6;
+}
   
   
   
