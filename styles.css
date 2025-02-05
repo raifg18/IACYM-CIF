@@ -65,32 +65,27 @@ header h3 {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Leyenda flotante reubicada al centro del lado izquierdo y estilizada */
+/* Leyenda flotante reubicada al centro del lado izquierdo y estilizada para móvil */
 #legend {
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
   background-color: rgba(255, 255, 255, 0.97);
-  padding: 15px 20px;
+  padding: 10px 15px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  max-width: 220px;
+  max-width: 180px;
   z-index: 1000;
+  font-size: 0.85em;
 }
 #legend h3 {
   margin: 0;
-  font-size: 1.4em;
+  font-size: 1.2em;
   color: #003366;
   border-bottom: 2px solid #003366;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-}
-#legend h4 {
-  margin: 0 0 10px;
-  font-size: 1.1em;
-  color: #003366;
-  font-weight: normal;
+  padding-bottom: 3px;
+  margin-bottom: 8px;
 }
 #legend ul {
   list-style: none;
@@ -99,9 +94,9 @@ header h3 {
 }
 #legend ul li {
   cursor: pointer;
-  padding: 8px;
-  margin-bottom: 8px;
-  font-size: 1em;
+  padding: 6px;
+  margin-bottom: 6px;
+  font-size: 0.9em;
   color: #003366;
   border: 1px solid #ccc;
   border-radius: 5px;
