@@ -144,14 +144,14 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     {
       name: "Célula Fidelidad",
-      coords: [-8.358787, -74.577339],
+      coords: [-8.359791, -74.579740],
       content: `
         <div class="popup-content">
           <h4>Célula Fidelidad</h4>
           <p><strong>Coordinadores:</strong> Eric y Carla Mananita</p>
           <p><strong>Dirección:</strong> Jr. 2 de mayo Mz 109 Lt 10A</p>
           <p><strong>Referencia:</strong> -</p>
-          <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/8wq6PTs5a39N8HC56" target="_blank">Ver en Maps</a></p>
+          <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/ZMHuQyCziobdx4NP9" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
