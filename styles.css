@@ -31,7 +31,7 @@ header h3 {
 
 /* Contenedor del mapa */
 #map {
-  height: 80vh; /* Ocupa el 80% de la altura de la ventana */
+  height: 80vh;
   width: 100%;
   position: relative;
 }
@@ -55,7 +55,7 @@ header h3 {
   text-decoration: underline;
 }
 
-/* Ícono personalizado para células: círculo pequeño de color rojo */
+/* Ícono para células: círculo pequeño de color rojo */
 .custom-marker {
   width: 15px;
   height: 15px;
@@ -75,13 +75,13 @@ header h3 {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Personalización de los tooltips (etiquetas de los marcadores) */
+/* Personalización de tooltips */
 .leaflet-tooltip.marker-label {
   background-color: rgba(255,255,255,0.9);
   color: #003366;
   border: 1px solid #003366;
   border-radius: 3px;
-  font-size: 0.75em;
+  font-size: 0.8em;
   padding: 2px 4px;
 }
 
@@ -96,21 +96,21 @@ header h3 {
 
 /* Leyenda general */
 #legend {
-  background-color: rgba(255, 255, 255, 0.97);
-  padding: 8px 10px;
+  background-color: rgba(255,255,255,0.97);
+  padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  max-width: 160px;
-  font-size: 0.75em;
-  margin-bottom: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-width: 200px;
+  font-size: 0.9em;
+  margin-bottom: 8px;
 }
 #legend h3 {
   margin: 0;
-  font-size: 1em;
+  font-size: 1.2em;
   color: #003366;
   border-bottom: 2px solid #003366;
   padding-bottom: 3px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 #legend ul {
   list-style: none;
@@ -119,9 +119,9 @@ header h3 {
 }
 #legend ul li {
   cursor: pointer;
-  padding: 4px;
-  margin-bottom: 4px;
-  font-size: 0.75em;
+  padding: 6px;
+  margin-bottom: 6px;
+  font-size: 0.9em;
   color: #003366;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -134,12 +134,12 @@ header h3 {
 
 /* Leyenda especial para IACYM (sin título) */
 #legend2 {
-  background-color: rgba(255, 255, 255, 0.97);
-  padding: 8px 10px;
+  background-color: rgba(255,255,255,0.97);
+  padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  max-width: 160px;
-  font-size: 0.75em;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-width: 200px;
+  font-size: 0.9em;
 }
 #legend2 .legend-item {
   display: flex;
@@ -149,7 +149,7 @@ header h3 {
 #legend2 .legend-icon {
   width: 15px;
   height: 15px;
-  margin-right: 6px;
+  margin-right: 8px;
   border: 2px solid #003366;
   border-radius: 50%;
 }
@@ -157,20 +157,21 @@ header h3 {
   background: blue;
 }
 #legend2 .legend-text {
-  font-size: 0.75em;
+  font-size: 0.9em;
   color: #003366;
 }
 
-/* Panel informativo expandible para "Más información" (ubicado en la esquina inferior derecha) */
+/* Panel informativo expandible ("Más información") ubicado en el centro del lado derecho */
 #info {
   position: absolute;
-  bottom: 10px;
+  top: 50%;
   right: 10px;
+  transform: translateY(-50%);
   background-color: rgba(255,255,255,0.95);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   max-width: 280px;
-  font-size: 0.75em;
+  font-size: 0.9em;
   z-index: 1000;
   overflow: hidden;
 }
