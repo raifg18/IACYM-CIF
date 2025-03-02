@@ -197,15 +197,6 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>IACYM - Yarinacocha</h4>
           <p>Te esperamos en nuestros cultos y reuniones:</p>
-          <ul>
-            <li>Cultos de oración: Miércoles a las 7 pm</li>
-            <li>Células de integración Familiar (CIF): Jueves en las noches</li>
-            <li>Reunión de adolescentes: Sábados a las 5 pm</li>
-            <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
-            <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
-          </ul>
-          <p>¡No faltes! Eres importante para nosotros y queremos que vivas una experiencia transformadora.</p>
-          <p style="font-style: italic;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
         </div>
       `
     }
@@ -249,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function() {
     markerObjects.push(marker);
   });
 
-  // Función para actualizar el contenido de los tooltips según el nivel de zoom
+  // Función para actualizar los tooltips según el nivel de zoom
   function updateTooltips() {
     var currentZoom = map.getZoom();
     markerObjects.forEach(function(marker, i) {
@@ -257,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentZoom < 15) {
           marker.setTooltipContent(markers[i].letter);
         } else {
-          marker.setTooltipContent(markers[i].cleanName);
+          marker.setTooltipContent(markers[i].letter + " - " + markers[i].cleanName);
         }
       }
     });
@@ -265,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function() {
   updateTooltips();
   map.on('zoomend', updateTooltips);
 
-  // Construimos la leyenda general (excluyendo IACYM) y mostramos "Letra - Nombre"
+  // Construimos la leyenda general (excluyendo IACYM) mostrando "Letra - Nombre"
   var legendDiv = document.getElementById("legend");
   if (legendDiv) {
     var legendHTML = '<h3>Leyenda</h3><ul>';
@@ -290,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Construimos la leyenda especial para IACYM (sin título) y sin el prefijo de letra
+  // Construimos la leyenda especial para IACYM (sin título y sin el prefijo de letra)
   var legend2Div = document.getElementById("legend2");
   if (legend2Div) {
     var iacym = markers.find(function(m) {
@@ -303,7 +294,6 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="legend-text">${iacym.cleanName}</div>
         </div>
       `;
-      // Agregamos evento de clic para la leyenda especial de IACYM
       legend2Div.querySelector(".legend-item").addEventListener("click", function() {
         var idx = markers.findIndex(function(m) {
           return m.cleanName === "IACYM - Yarinacocha";
@@ -316,17 +306,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Configuramos el panel informativo expandible ("Más información")
+  // Configuramos el panel informativo expandible ("Más información") para que esté en el centro del lado derecho.
   var infoDiv = document.getElementById("info");
   if (infoDiv) {
-    // Inicia colapsado, solo muestra el header
     document.getElementById("info-header").addEventListener("click", function() {
       var content = document.getElementById("info-content");
-      if (content.style.display === "block") {
-        content.style.display = "none";
-      } else {
-        content.style.display = "block";
-      }
+      content.style.display = (content.style.display === "block") ? "none" : "block";
     });
   }
 });
