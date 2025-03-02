@@ -197,6 +197,15 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>IACYM - Yarinacocha</h4>
           <p>Te esperamos en nuestros cultos y reuniones:</p>
+          <ul>
+            <li>Cultos de oración: Miércoles a las 7 pm</li>
+            <li>Células de integración Familiar (CIF): Jueves en las noches</li>
+            <li>Reunión de adolescentes: Sábados a las 5 pm</li>
+            <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
+            <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
+          </ul>
+          <p>Te esperamos!</p>
+          <p style="font-style: italic;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
         </div>
       `
     }
@@ -245,24 +254,21 @@ document.addEventListener("DOMContentLoaded", function() {
     var currentZoom = map.getZoom();
     markerObjects.forEach(function(marker, i) {
       if (markers[i].cleanName !== "IACYM - Yarinacocha") {
-        if (currentZoom < 15) {
-          marker.setTooltipContent(markers[i].letter);
-        } else {
-          marker.setTooltipContent(markers[i].letter + " - " + markers[i].cleanName);
-        }
+        // Siempre mostramos el nombre limpio en el tooltip (sin la letra) para esta versión
+        marker.setTooltipContent(markers[i].cleanName);
       }
     });
   }
   updateTooltips();
   map.on('zoomend', updateTooltips);
 
-  // Construimos la leyenda general (excluyendo IACYM) mostrando "Letra - Nombre"
+  // Construimos la leyenda general (excluyendo IACYM) y mostramos solo el nombre limpio
   var legendDiv = document.getElementById("legend");
   if (legendDiv) {
     var legendHTML = '<h3>Leyenda</h3><ul>';
     markers.filter(function(m) { return m.cleanName !== "IACYM - Yarinacocha"; })
            .forEach(function(markerData, index) {
-      legendHTML += `<li data-index="${index}">${markerData.letter} - ${markerData.cleanName}</li>`;
+      legendHTML += `<li data-index="${index}">${markerData.cleanName}</li>`;
     });
     legendHTML += '</ul>';
     legendDiv.innerHTML = legendHTML;
@@ -306,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Configuramos el panel informativo expandible ("Más información") para que esté en el centro del lado derecho.
+  // Configuramos el panel informativo expandible ("Más información")
   var infoDiv = document.getElementById("info");
   if (infoDiv) {
     document.getElementById("info-header").addEventListener("click", function() {
