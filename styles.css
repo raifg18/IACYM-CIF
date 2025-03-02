@@ -55,29 +55,54 @@ header h3 {
   text-decoration: underline;
 }
 
-/* Ícono personalizado: círculo pequeño y llamativo */
+/* Ícono personalizado para células: círculo pequeño de color rojo */
 .custom-marker {
-  width: 20px;
-  height: 20px;
-  background: #ffcc00;
+  width: 15px;
+  height: 15px;
+  background: red;
   border: 2px solid #003366;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Leyenda flotante reubicada al centro del lado izquierdo y estilizada para móvil */
-#legend {
+/* Ícono para IACYM: círculo pequeño de color azul */
+.custom-marker.blue {
+  width: 15px;
+  height: 15px;
+  background: blue;
+  border: 2px solid #003366;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Personalización de los tooltips (etiquetas de los marcadores) */
+.leaflet-tooltip.marker-label {
+  background-color: rgba(255,255,255,0.9);
+  color: #003366;
+  border: 1px solid #003366;
+  border-radius: 3px;
+  font-size: 0.8em;
+  padding: 2px 4px;
+}
+
+/* Contenedor de leyendas: se posiciona en la esquina superior izquierda */
+#legends {
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
+  z-index: 1000;
+}
+
+/* Leyenda general */
+#legend {
   background-color: rgba(255, 255, 255, 0.97);
   padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   max-width: 180px;
-  z-index: 1000;
   font-size: 0.85em;
+  margin-bottom: 8px;
 }
 #legend h3 {
   margin: 0;
@@ -106,10 +131,46 @@ header h3 {
 #legend ul li:hover {
   background-color: #e6e6e6;
 }
-  
-  
-  
-  
-  
-  
-  
+
+/* Leyenda especial para IACYM (sin título) */
+#legend2 {
+  background-color: rgba(255, 255, 255, 0.97);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-width: 180px;
+  font-size: 0.85em;
+}
+#legend2 .legend-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+#legend2 .legend-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 8px;
+  border: 2px solid #003366;
+  border-radius: 50%;
+}
+#legend2 .legend-icon.blue {
+  background: blue;
+}
+#legend2 .legend-text {
+  font-size: 0.9em;
+  color: #003366;
+}
+
+/* Panel informativo para IACYM (ubicado en la esquina inferior derecha) */
+#info {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(255,255,255,0.95);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  max-width: 300px;
+  font-size: 0.85em;
+  z-index: 1000;
+}
