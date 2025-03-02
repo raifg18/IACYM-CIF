@@ -81,7 +81,7 @@ header h3 {
   color: #003366;
   border: 1px solid #003366;
   border-radius: 3px;
-  font-size: 0.8em;
+  font-size: 0.75em;
   padding: 2px 4px;
 }
 
@@ -97,20 +97,20 @@ header h3 {
 /* Leyenda general */
 #legend {
   background-color: rgba(255,255,255,0.97);
-  padding: 10px 15px;
+  padding: 8px 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  max-width: 200px;
-  font-size: 0.9em;
-  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  max-width: 150px;
+  font-size: 0.8em;
+  margin-bottom: 6px;
 }
 #legend h3 {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1em;
   color: #003366;
   border-bottom: 2px solid #003366;
   padding-bottom: 3px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 #legend ul {
   list-style: none;
@@ -119,9 +119,9 @@ header h3 {
 }
 #legend ul li {
   cursor: pointer;
-  padding: 6px;
-  margin-bottom: 6px;
-  font-size: 0.9em;
+  padding: 4px;
+  margin-bottom: 4px;
+  font-size: 0.8em;
   color: #003366;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -135,11 +135,11 @@ header h3 {
 /* Leyenda especial para IACYM (sin título) */
 #legend2 {
   background-color: rgba(255,255,255,0.97);
-  padding: 10px 15px;
+  padding: 8px 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  max-width: 200px;
-  font-size: 0.9em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  max-width: 150px;
+  font-size: 0.8em;
 }
 #legend2 .legend-item {
   display: flex;
@@ -149,7 +149,7 @@ header h3 {
 #legend2 .legend-icon {
   width: 15px;
   height: 15px;
-  margin-right: 8px;
+  margin-right: 6px;
   border: 2px solid #003366;
   border-radius: 50%;
 }
@@ -157,11 +157,11 @@ header h3 {
   background: blue;
 }
 #legend2 .legend-text {
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: #003366;
 }
 
-/* Panel informativo expandible ("Más información") ubicado en el centro del lado derecho */
+/* Panel informativo expandible ("Más información") en la parte media del lado derecho */
 #info {
   position: absolute;
   top: 50%;
@@ -170,8 +170,8 @@ header h3 {
   background-color: rgba(255,255,255,0.95);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  max-width: 280px;
-  font-size: 0.9em;
+  max-width: 240px;
+  font-size: 0.8em;
   z-index: 1000;
   overflow: hidden;
 }
@@ -181,9 +181,9 @@ header h3 {
   padding: 6px 10px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 #info #info-content {
   display: none;
-  padding: 10px;
+  padding: 8px;
 }
