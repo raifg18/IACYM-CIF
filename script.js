@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
       return L.Util.template(this._url, {q: quadKey});
     }
   });
-
   L.tileLayer.bing = function(url, options) {
     return new BingLayer(url, options);
   };
@@ -54,160 +53,226 @@ document.addEventListener("DOMContentLoaded", function() {
   };
   L.control.layers(baseLayers).addTo(map);
 
-  // Ícono personalizado: círculo pequeño sin texto
-  var customIcon = L.divIcon({
+  // Íconos personalizados: rojo para las células y azul para IACYM
+  var redIcon = L.divIcon({
     html: '<div class="custom-marker"></div>',
-    className: '', // No se añaden clases extra
-    iconSize: [20, 20],
-    iconAnchor: [10, 20]  // Ancla en el centro inferior del círculo
+    className: '',
+    iconSize: [15, 15],
+    iconAnchor: [7.5, 15]
+  });
+  var blueIcon = L.divIcon({
+    html: '<div class="custom-marker blue"></div>',
+    className: '',
+    iconSize: [15, 15],
+    iconAnchor: [7.5, 15]
   });
 
-  // Array de marcadores con la información de cada célula
+  // Array de marcadores con la información de cada célula.
+  // Los nombres siguen el formato "Nombre - Letra" para extraer el ID, excepto IACYM se asigna manualmente.
   var markers = [
     {
-      name: "Célula Templanza",
-      coords: [-8.381536, -74.570015],
+      name: "Célula Templanza - F",
+      coords: [-8.382756236614052, -74.57020359646457],
       content: `
         <div class="popup-content">
           <h4>Célula Templanza</h4>
-          <p><strong>Coordinadores:</strong> Martin Jonhson y Cecilia Taboada</p>
-          <p><strong>Dirección:</strong> Jr Alamedas</p>
+          <p><strong>Coordinadores:</strong> Martin & Cecilia Jonhson</p>
+          <p><strong>Dirección:</strong> Jr Alamedas Mz. A Lt. 06</p>
           <p><strong>Referencia:</strong> A espaldas de Gracias y Sazón</p>
-          <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/3YNUMad8ehKxHHAo7" target="_blank">Ver en Maps</a></p>
+          <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/vrLo96DBVKQ9gW1T7" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Mansedumbre",
+      name: "Célula Mansedumbre - C",
       coords: [-8.356701, -74.574206],
       content: `
         <div class="popup-content">
           <h4>Célula Mansedumbre</h4>
-          <p><strong>Coordinadores:</strong> Alirio y Natalie Cabezas</p>
+          <p><strong>Coordinadores:</strong> Alirio & Natalie Cabezas</p>
           <p><strong>Dirección:</strong> Jr Miguel Grau #160</p>
-          <p><strong>Referencia:</strong> Entrada principal Hospital de Yarina</p>
+          <p><strong>Referencia:</strong> Entrada principal del Hospital Amazónico</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/eehCaKtWjMhS8uK57" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Bondad",
+      name: "Célula Bondad - I",
       coords: [-8.358961, -74.603817],
       content: `
         <div class="popup-content">
           <h4>Célula Bondad</h4>
-          <p><strong>Coordinadores:</strong> Nixon</p>
-          <p><strong>Dirección:</strong> San Pablo de Tushmo AA.HH villa arcijeu Mz.B Lt. 4</p>
-          <p><strong>Referencia:</strong> A espaldas de ladrillería escorpión</p>
+          <p><strong>Coordinadores:</strong> Nixón & Rosa Ruíz</p>
+          <p><strong>Dirección:</strong> San Pablo de Tushmo - AAHH Villa Arcijeo Pasaje 1, Mz B Lt 04</p>
+          <p><strong>Referencia:</strong> A Espaldas de ladrillera Escorpión - Tushmo</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/v62joApmvH5a67j26" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Fe",
+      name: "Célula Fe - E",
       coords: [-8.377743, -74.568243],
       content: `
         <div class="popup-content">
           <h4>Célula Fe</h4>
-          <p><strong>Coordinadores:</strong> -</p>
-          <p><strong>Dirección:</strong> Av Universitaria MZ E Lt 5</p>
+          <p><strong>Coordinadores:</strong> Kevin & Gemima Córdova</p>
+          <p><strong>Dirección:</strong> Av Universitaria Mz. E Lt. 5</p>
           <p><strong>Referencia:</strong> Frente al parque El Lagarto</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/gJ7PW2YdaGbmmpk7A" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Paz",
+      name: "Célula Paz - D",
       coords: [-8.361776, -74.572762],
       content: `
         <div class="popup-content">
           <h4>Célula Paz</h4>
-          <p><strong>Coordinadores:</strong> Maradona y Lorena Mera</p>
-          <p><strong>Dirección:</strong> Jirón Lobo Caño 347-Yarinacocha</p>
-          <p><strong>Referencia:</strong> Media cuadra del Real Olimpia</p>
+          <p><strong>Coordinadores:</strong> Maradona & Lorena Mera</p>
+          <p><strong>Dirección:</strong> Jr Lobo Caño #347</p>
+          <p><strong>Referencia:</strong> A media cuadra del Real Olimpia</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/9EW3eF13D95YQW3o7" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Amor",
+      name: "Célula Amor - G",
       coords: [-8.371306, -74.560079],
       content: `
         <div class="popup-content">
           <h4>Célula Amor</h4>
-          <p><strong>Coordinadores:</strong> Oldivio</p>
-          <p><strong>Dirección:</strong> Calle Colón MZ 167 Lt 7</p>
-          <p><strong>Referencia:</strong> al costado de la I.E Jorge Coquis Herrera</p>
+          <p><strong>Coordinadores:</strong> Oldivio & Antonia Isuiza</p>
+          <p><strong>Dirección:</strong> Calle Colón Mz. 167 Lt. 7</p>
+          <p><strong>Referencia:</strong> Al costado de la IE. Jorge Coquis Herrera</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/DMNbeKQynLU7BGwW6" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Fidelidad",
+      name: "Célula Fidelidad - A",
       coords: [-8.359791, -74.579740],
       content: `
         <div class="popup-content">
           <h4>Célula Fidelidad</h4>
-          <p><strong>Coordinadores:</strong> Eric y Carla Mananita</p>
-          <p><strong>Dirección:</strong> Jr. 2 de mayo Mz 109 Lt 10A</p>
-          <p><strong>Referencia:</strong> -</p>
+          <p><strong>Coordinadores:</strong> Eric & Carla Mananita</p>
+          <p><strong>Dirección:</strong> Jr 2 de mayo Mz. 109 Lt. 10A</p>
+          <p><strong>Referencia:</strong> A 5 cuadras de la municipalidad de Yarinacocha</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/ZMHuQyCziobdx4NP9" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Benignidad",
+      name: "Célula Benignidad  - B",
       coords: [-8.371104, -74.574807],
       content: `
         <div class="popup-content">
           <h4>Célula Benignidad</h4>
-          <p><strong>Coordinadores:</strong> Oldemar y Lucy Muñoz</p>
-          <p><strong>Dirección:</strong> Jr. Las Gaviotas Mz 11A Lt 07</p>
-          <p><strong>Referencia:</strong> -</p>
+          <p><strong>Coordinadores:</strong> Oldemar & Lucy Muñoz</p>
+          <p><strong>Dirección:</strong> Jr Las Gaviotas Mz. 11a Lt. 07</p>
+          <p><strong>Referencia:</strong> AAHH "La Juventud"</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/8W92SE2spfK96ZS77" target="_blank">Ver en Maps</a></p>
         </div>
       `
     },
     {
-      name: "Célula Paciencia",
+      name: "Célula Paciencia - H",
       coords: [-8.393169, -74.583208],
       content: `
         <div class="popup-content">
           <h4>Célula Paciencia</h4>
-          <p><strong>Coordinadores:</strong> Joel y Diana Pinedo</p>
-          <p><strong>Dirección:</strong> Carretera Federico basadre 6400</p>
-          <p><strong>Referencia:</strong> Ex Dorado, al costado de la Kola Real</p>
+          <p><strong>Coordinadores:</strong> Joel & Diana Pinedo</p>
+          <p><strong>Dirección:</strong> Km 6.400 de la carretera Federico Basadre</p>
+          <p><strong>Referencia:</strong> Al costado de la Kola Real. Ex Dorado</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/8a9hqEioGjhtn7MTA" target="_blank">Ver en Maps</a></p>
+        </div>
+      `
+    },
+    {
+      // Nuevo marcador para IACYM, sin tooltip.
+      name: "IACYM - Yarinacocha",
+      coords: [-8.359427938520353, -74.57348632740167],
+      letter: "I",
+      cleanName: "IACYM - Yarinacocha",
+      content: `
+        <div class="popup-content">
+          <h4>IACYM - Yarinacocha</h4>
+          <p>Te esperamos en nuestros cultos y reuniones:</p>
         </div>
       `
     }
   ];
 
-  // Almacenamos las instancias de los marcadores
-  var markerObjects = [];
+  // Extraemos la letra y el nombre limpio de cada marcador que no tenga ya estas propiedades
+  markers.forEach(function(m) {
+    if (!m.letter || !m.cleanName) {
+      let parts = m.name.split(" - ");
+      if (parts.length > 1) {
+        m.letter = parts[1].trim();
+        m.cleanName = parts[0].trim();
+      } else {
+        m.letter = "";
+        m.cleanName = m.name;
+      }
+    }
+  });
 
+  // Ordenamos los marcadores por la letra (alfabéticamente)
+  markers.sort(function(a, b) {
+    return a.letter.localeCompare(b.letter);
+  });
+
+  // Creamos los marcadores en el mapa y les asignamos un tooltip permanente.
+  // Usamos blueIcon para IACYM y redIcon para los demás.
+  var markerObjects = [];
   markers.forEach(function(markerData, index) {
-    var marker = L.marker(markerData.coords, {icon: customIcon}).addTo(map);
+    var iconToUse = (markerData.cleanName === "IACYM - Yarinacocha") ? blueIcon : redIcon;
+    var marker = L.marker(markerData.coords, {icon: iconToUse}).addTo(map);
     marker.bindPopup(markerData.content);
+    // Vinculamos tooltip solo si NO es IACYM
+    if (markerData.cleanName !== "IACYM - Yarinacocha") {
+      marker.bindTooltip("", {
+        permanent: true,
+        direction: "top",
+        className: "marker-label",
+        offset: [0, -5]
+      });
+    }
     markerObjects.push(marker);
   });
 
-  // Creamos la leyenda en el div con id "legend" sin el subtítulo "Células"
+  // Función para actualizar el contenido de los tooltips según el nivel de zoom
+  function updateTooltips() {
+    var currentZoom = map.getZoom();
+    markerObjects.forEach(function(marker, i) {
+      if (markers[i].cleanName !== "IACYM - Yarinacocha") {
+        if (currentZoom < 15) {
+          marker.setTooltipContent(markers[i].letter);
+        } else {
+          marker.setTooltipContent(markers[i].cleanName);
+        }
+      }
+    });
+  }
+  updateTooltips();
+  map.on('zoomend', updateTooltips);
+
+  // Construimos la leyenda general (excluyendo IACYM) y mostramos "Letra - Nombre"
   var legendDiv = document.getElementById("legend");
   if (legendDiv) {
     var legendHTML = '<h3>Leyenda</h3><ul>';
-    markers.forEach(function(markerData, index) {
-      legendHTML += `<li data-index="${index}">${markerData.name}</li>`;
+    markers.filter(function(m) { return m.cleanName !== "IACYM - Yarinacocha"; })
+           .forEach(function(markerData, index) {
+      legendHTML += `<li data-index="${index}">${markerData.letter} - ${markerData.cleanName}</li>`;
     });
     legendHTML += '</ul>';
     legendDiv.innerHTML = legendHTML;
 
-    // Asignamos el evento de clic para cada elemento de la leyenda
     var legendItems = legendDiv.getElementsByTagName("li");
     for (var i = 0; i < legendItems.length; i++) {
       legendItems[i].addEventListener("click", function() {
         var index = this.getAttribute("data-index");
-        var marker = markerObjects[index];
+        var filteredMarkers = markers.filter(function(m) { return m.cleanName !== "IACYM - Yarinacocha"; });
+        var marker = markerObjects[markers.indexOf(filteredMarkers[index])];
         if (marker) {
           map.setView(marker.getLatLng(), 15);
           marker.openPopup();
@@ -215,10 +280,49 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   }
+
+  // Construimos la leyenda especial para IACYM (sin título)
+  var legend2Div = document.getElementById("legend2");
+  if (legend2Div) {
+    var iacym = markers.find(function(m) {
+      return m.cleanName === "IACYM - Yarinacocha";
+    });
+    if (iacym) {
+      legend2Div.innerHTML = `
+        <div class="legend-item">
+          <div class="legend-icon blue"></div>
+          <div class="legend-text">${iacym.cleanName}</div>
+        </div>
+      `;
+      // Agregamos evento de clic para la leyenda especial de IACYM
+      legend2Div.querySelector(".legend-item").addEventListener("click", function() {
+        var idx = markers.findIndex(function(m) {
+          return m.cleanName === "IACYM - Yarinacocha";
+        });
+        if (idx !== -1) {
+          map.setView(markerObjects[idx].getLatLng(), 15);
+          markerObjects[idx].openPopup();
+        }
+      });
+    }
+  }
+
+  // Actualizamos el panel informativo con el formato para IACYM
+  var infoDiv = document.getElementById("info");
+  if (infoDiv) {
+    infoDiv.innerHTML = `
+      <div style="font-family: Arial, sans-serif;">
+        <p style="font-size: 1.2em; font-weight: bold;">Te esperamos en nuestros:</p>
+        <ul style="list-style: disc; padding-left: 20px; margin: 0;">
+          <li>Cultos de oración: Miércoles a las 7 pm</li>
+          <li>Células de integración Familiar (CIF): Jueves en las noches</li>
+          <li>Reunión de adolescentes: Sábados a las 5 pm</li>
+          <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
+          <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
+        </ul>
+        <p style="margin-top: 10px;">¡Te esperamos!</p>
+        <p style="font-style: italic; margin-top: 10px;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
+      </div>
+    `;
+  }
 });
-  
-  
-  
-  
-  
-  
