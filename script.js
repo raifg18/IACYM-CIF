@@ -197,6 +197,15 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>IACYM - Yarinacocha</h4>
           <p>Te esperamos en nuestros cultos y reuniones:</p>
+          <ul>
+            <li>Cultos de oración: Miércoles a las 7 pm</li>
+            <li>Células de integración Familiar (CIF): Jueves en las noches</li>
+            <li>Reunión de adolescentes: Sábados a las 5 pm</li>
+            <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
+            <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
+          </ul>
+          <p>¡No faltes! Eres importante para nosotros y queremos que vivas una experiencia transformadora.</p>
+          <p style="font-style: italic;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
         </div>
       `
     }
@@ -281,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Construimos la leyenda especial para IACYM (sin título)
+  // Construimos la leyenda especial para IACYM (sin título) y sin el prefijo de letra
   var legend2Div = document.getElementById("legend2");
   if (legend2Div) {
     var iacym = markers.find(function(m) {
@@ -307,22 +316,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Actualizamos el panel informativo con el formato para IACYM
+  // Configuramos el panel informativo expandible ("Más información")
   var infoDiv = document.getElementById("info");
   if (infoDiv) {
-    infoDiv.innerHTML = `
-      <div style="font-family: Arial, sans-serif;">
-        <p style="font-size: 1.2em; font-weight: bold;">Te esperamos en nuestros:</p>
-        <ul style="list-style: disc; padding-left: 20px; margin: 0;">
-          <li>Cultos de oración: Miércoles a las 7 pm</li>
-          <li>Células de integración Familiar (CIF): Jueves en las noches</li>
-          <li>Reunión de adolescentes: Sábados a las 5 pm</li>
-          <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
-          <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
-        </ul>
-        <p style="margin-top: 10px;">¡Te esperamos!</p>
-        <p style="font-style: italic; margin-top: 10px;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
-      </div>
-    `;
+    // Inicia colapsado, solo muestra el header
+    document.getElementById("info-header").addEventListener("click", function() {
+      var content = document.getElementById("info-content");
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
   }
 });
