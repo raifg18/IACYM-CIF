@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return new BingLayer(url, options);
   };
 
-  // Definición de las capas base
+  // Capas base
   var googleTerrain = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     attribution: 'Google Terrain'
@@ -38,14 +38,14 @@ document.addEventListener("DOMContentLoaded", function() {
     attribution: 'Bing Maps'
   });
 
-  // Inicializamos el mapa centrado en Pucallpa, con Google Terrain por defecto
+  // Mapa centrado en Pucallpa
   var map = L.map('map', {
     center: [-8.381536, -74.570015],
     zoom: 13,
     layers: [googleTerrain]
   });
 
-  // Control de capas base para alternar entre las opciones
+  // Control de capas base
   var baseLayers = {
     "Google Terrain": googleTerrain,
     "Google Hybrid": googleHybrid,
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
   };
   L.control.layers(baseLayers).addTo(map);
 
-  // Íconos personalizados: rojo para las células y azul para IACYM
+  // Íconos personalizados
   var redIcon = L.divIcon({
     html: '<div class="custom-marker"></div>',
     className: '',
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Array de marcadores con la información de cada célula.
-  // Los nombres siguen el formato "Nombre - Letra" para extraer el ID, excepto IACYM se asigna manualmente.
+  // Los nombres usan el formato "Célula X - Letra" para extraer la letra.
   var markers = [
     {
       name: "Célula Templanza - F",
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <h4>Célula Templanza</h4>
           <p><strong>Coordinadores:</strong> Martin & Cecilia Jonhson</p>
           <p><strong>Dirección:</strong> Jr Alamedas Mz. A Lt. 06</p>
-          <p><strong>Referencia:</strong> A espaldas de Gracias y Sazón</p>
+          <p><strong>Referencia:</strong> A espaldas de Gratia y Sazón</p>
           <p><strong>Ubicación:</strong> <a href="https://maps.app.goo.gl/vrLo96DBVKQ9gW1T7" target="_blank">Ver en Maps</a></p>
         </div>
       `
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
       `
     },
     {
-      // Nuevo marcador para IACYM, sin tooltip.
+      // Marcador para IACYM, sin tooltip.
       name: "IACYM - Yarinacocha",
       coords: [-8.359427938520353, -74.57348632740167],
       letter: "I",
@@ -197,23 +197,15 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="popup-content">
           <h4>IACYM - Yarinacocha</h4>
           <p>Te esperamos en nuestros cultos y reuniones:</p>
-          <ul>
-            <li>Cultos de oración: Miércoles a las 7 pm</li>
-            <li>Células de integración Familiar (CIF): Jueves en las noches</li>
-            <li>Reunión de adolescentes: Sábados a las 5 pm</li>
-            <li>Reunión de jóvenes y jóvenes adultos: Sábados a las 7:30 pm</li>
-            <li>Culto dominical: 1er servicio 8 am; 2do servicio 10 am</li>
-          </ul>
-          <p>Te esperamos!</p>
           <p style="font-style: italic;">"No dejemos de congregarnos, como algunos tienen por costumbre, sino animémonos unos a otros, y tanto más, cuanto veis que aquel día se acerca." - Hebreos 10:25</p>
         </div>
       `
     }
   ];
 
-  // Extraemos la letra y el nombre limpio de cada marcador que no tenga ya estas propiedades
+  // Para cada marcador, si el nombre comienza con "Célula ", extraemos un "shortName" sin ese prefijo.
   markers.forEach(function(m) {
-    if (!m.letter || !m.cleanName) {
+    if(m.cleanName === undefined) {
       let parts = m.name.split(" - ");
       if (parts.length > 1) {
         m.letter = parts[1].trim();
@@ -223,6 +215,12 @@ document.addEventListener("DOMContentLoaded", function() {
         m.cleanName = m.name;
       }
     }
+    // Si cleanName empieza con "Célula ", crear shortName quitando esa palabra.
+    if(m.cleanName.startsWith("Célula ")) {
+      m.shortName = m.cleanName.replace("Célula ", "");
+    } else {
+      m.shortName = m.cleanName;
+    }
   });
 
   // Ordenamos los marcadores por la letra (alfabéticamente)
@@ -230,14 +228,15 @@ document.addEventListener("DOMContentLoaded", function() {
     return a.letter.localeCompare(b.letter);
   });
 
-  // Creamos los marcadores en el mapa y les asignamos un tooltip permanente.
+  // Creamos los marcadores en el mapa y asignamos tooltips.
   // Usamos blueIcon para IACYM y redIcon para los demás.
   var markerObjects = [];
   markers.forEach(function(markerData, index) {
     var iconToUse = (markerData.cleanName === "IACYM - Yarinacocha") ? blueIcon : redIcon;
     var marker = L.marker(markerData.coords, {icon: iconToUse}).addTo(map);
     marker.bindPopup(markerData.content);
-    // Vinculamos tooltip solo si NO es IACYM
+    // Vinculamos tooltip para marcadores que no sean IACYM: 
+    // Si zoom < 15 se muestra la letra, si zoom >= 15 se muestra el shortName.
     if (markerData.cleanName !== "IACYM - Yarinacocha") {
       marker.bindTooltip("", {
         permanent: true,
@@ -249,31 +248,34 @@ document.addEventListener("DOMContentLoaded", function() {
     markerObjects.push(marker);
   });
 
-  // Función para actualizar los tooltips según el nivel de zoom
+  // Función para actualizar los tooltips según el nivel de zoom.
   function updateTooltips() {
     var currentZoom = map.getZoom();
     markerObjects.forEach(function(marker, i) {
       if (markers[i].cleanName !== "IACYM - Yarinacocha") {
-        // Siempre mostramos el nombre limpio en el tooltip (sin la letra) para esta versión
-        marker.setTooltipContent(markers[i].cleanName);
+        if (currentZoom < 15) {
+          marker.setTooltipContent(markers[i].letter);
+        } else {
+          marker.setTooltipContent(markers[i].shortName);
+        }
       }
     });
   }
   updateTooltips();
   map.on('zoomend', updateTooltips);
 
-  // Construimos la leyenda general (excluyendo IACYM) y mostramos solo el nombre limpio
-  var legendDiv = document.getElementById("legend");
-  if (legendDiv) {
-    var legendHTML = '<h3>Leyenda</h3><ul>';
+  // Construimos la leyenda general (excluyendo IACYM) y mostramos el nombre limpio.
+  var legendContent = document.getElementById("legend-content");
+  if (legendContent) {
+    var legendHTML = '<ul>';
     markers.filter(function(m) { return m.cleanName !== "IACYM - Yarinacocha"; })
            .forEach(function(markerData, index) {
       legendHTML += `<li data-index="${index}">${markerData.cleanName}</li>`;
     });
     legendHTML += '</ul>';
-    legendDiv.innerHTML = legendHTML;
+    legendContent.innerHTML = legendHTML;
 
-    var legendItems = legendDiv.getElementsByTagName("li");
+    var legendItems = legendContent.getElementsByTagName("li");
     for (var i = 0; i < legendItems.length; i++) {
       legendItems[i].addEventListener("click", function() {
         var index = this.getAttribute("data-index");
@@ -285,6 +287,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     }
+  }
+
+  // Hacemos la leyenda general expandible
+  var legendHeader = document.getElementById("legend-header");
+  if (legendHeader) {
+    legendHeader.addEventListener("click", function() {
+      var content = document.getElementById("legend-content");
+      content.style.display = (content.style.display === "block") ? "none" : "block";
+    });
   }
 
   // Construimos la leyenda especial para IACYM (sin título y sin el prefijo de letra)
